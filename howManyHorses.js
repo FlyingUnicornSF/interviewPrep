@@ -24,26 +24,32 @@
 
 // 2
 
-howManyHourses = (string) => {
-  // you can put this is an array like 
-  // let letterCount = [];
-  // that way it's more generic 
-    let nCount = 0;
-    let eCount = 0;
-    let iCount = 0;
-    let gCount = 0;
-    let hCount = 0;
+howManyHourses = (string, sound) => {
+  let count = 0;
+  let letterCount = Array(string.length);
+  letterCount.fill(0, 0, letterCount.length)
+  // n = 0;
+  // e = 1;
+  // i = 2;
+  // g = 3;
+  // h = 4;
     for( let i = 0; i < string.length; i++ ) {
-      // and if you use an array then you can change the nCount > ecount 
-      // to letterCount[0]>letterCount[1], etc 
-      if(string[i]==="n") nCount++;
-      if(string[i]==="e"  && nCount > eCount) eCount++;
-      if(string[i]==="i" && eCount > iCount) iCount++;
-      if(string[i]==="g" && iCount > gCount) gCount++;
-      if(string[i]==="h" && gCount > hCount) hCount++;
+      // i could do this with for loop
+      // if(string[i]==="n") letterCount[0]++;
+      // if(string[i]==="e"  && letterCount[0] > letterCount[1]) letterCount[1]++;
+      // if(string[i]==="i" && letterCount[1] > letterCount[2]) letterCount[2]++;
+      // if(string[i]==="g" && letterCount[2] > letterCount[3]) letterCount[3]++;
+      // if(string[i]==="h" && letterCount[3] > letterCount[4]) letterCount[4]++;
+      for( let j = 0; j < sound.length; j++){
+        if(string[i]===sound[0]) letterCount[0]++;
+        if(string[i]===sound[j] && letterCount[j-1] > letterCount[j]) letterCount[j]++;
+      }
+      // how do I know it was continuous 
     }
-    return hCount;
+    return letterCount[sound.length-1];
 }
-console.log(howManyHourses("nenigehnieighgh"));
-console.log(howManyHourses("neningeehingiheighgh"));
-console.log(howManyHourses("aeranoiwierhofgwaneraergtwe"));
+console.log(howManyHourses("nenigehnieighgh", "neigh"));
+console.log(howManyHourses("neningeehingiheighgh", "neigh"));
+console.log(howManyHourses("aeranoiwierhofgwaneraergtwe", "neigh"));
+//nene neigh-neigh ighigh should return 3...
+console.log(howManyHourses("neneneighneighighigh", "neigh"));
