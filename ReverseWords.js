@@ -16,7 +16,7 @@ The second one is giving an array, each letter is an element including a space.
 // would I ever do that? ¯\_(ツ)_/¯ 
 // I imagine the time complexity of this one lien solution is pretty high.
 
-// Below solition time complexity is O(n) 
+/* //Below solition time complexity is O(n) 
 
 reverseWordsString = (str)=>{
   // let arr = str.split(" ");
@@ -63,8 +63,80 @@ reverseWordsString = (str)=>{
 
   return output 
 }
-
+*/
+/* way cleaner than yesterday's solition*/
+reverseWordsString = (str)=>{
+  let output = ""; 
+  let counter = 0;
+  let lastIndex = str.length - 1; 
+  
+  for ( let i = lastIndex; i >= 0; i--) {
+    //console.log(str[i])
+    // if (str[i] === " ") you don't have to do anything 
+    if( str[i] !== " ") {
+      // start counting how many letters in that word 
+      counter++;
+        
+      if ( i === 0 || str[i-1] == " ") {
+      // when it encounter the "end of the word"
+      // or when the i-1 is out of range 
+      // ^ when i = 0
+      // stop counting 
+      // add sliced string to the output
+        if( output.length === 0){
+          output = output + str.slice(i, i +  counter)
+          //console.log(output)
+          counter = 0;
+        } else {
+          output = output + " " + str.slice(i, i +  counter)
+          //console.log(output)
+          counter = 0;
+        }
+      }
+    }
+  }
+  return output;
+}
 console.log(reverseWordsString("the sky is blue"))
 console.log(reverseWordsString("   the sky   is blue   "))
 console.log(reverseWordsString("   ")) // two spaces
 console.log(reverseWordsString("a"))
+
+/* try this with input array instead of string */
+reverseWordsArray = (arr)=> {
+  let output = ""; 
+  let counter = 0;
+  let lastIndex = arr.length - 1; 
+  
+  for ( let i = lastIndex; i >= 0; i--) {
+
+    // if (arr[i] === " ") you don't have to do anything 
+    if( arr[i] !== " ") {
+      // start counting how many letters in that word 
+      counter++;
+        
+      if ( i === 0 || arr[i-1] == " ") {
+      // when it encounter the "end of the word"
+      // or when the i-1 is out of range 
+      // ^ when i = 0
+      // stop counting 
+      // add sliced arr to the output
+        if( output.length === 0){
+          output = output + arr.slice(i, i +  counter)
+          //console.log(output)
+          counter = 0;
+        } else {
+          output = output + " " + arr.slice(i, i +  counter)
+          //console.log(output)
+          counter = 0;
+        }
+      }
+    }
+  }
+  return output;
+}
+
+console.log(reverseWordsArray(["t", "h", "e", " ", "s", "k", "y", " ", "i", "s", " ", "b", "l", "u", "e"]))
+console.log(reverseWordsArray([" ", " ", " ", "t", "h", "e", " ", "s", "k", "y", " ", " ", " ", "i", "s", " ", "b", "l", "u", "e", " ", " ", " "]))
+console.log(reverseWordsArray([" ", " "])) // two spaces
+console.log(reverseWordsArray(["a"]))
