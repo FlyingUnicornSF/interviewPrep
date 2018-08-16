@@ -1,7 +1,9 @@
-let data = [[ 1, 2, 3, 4, 5],
-        [ 6, 7, 8, 9, 10],
+let data = [
+        [ 1,  2,  3,  4,   5],
+        [ 6,  7,  8,  9,  10],
         [ 11, 12, 13, 14, 15],
-        [ 16, 17, 18, 19, 20]]
+        [ 16, 17, 18, 19, 20]
+      ]
  
  // empty array
  // same size arrays
@@ -24,6 +26,8 @@ let data = [[ 1, 2, 3, 4, 5],
 // toUp = n-1
 // ES6!
 //spiral = () => {
+
+/*
 function spiral(data) {
     // let totalCellCount = data.length * data[0].length;
     // let visited = 0
@@ -72,4 +76,69 @@ function spiral(data) {
         }
     }    
 }
+*/
+// abave is just to console.log/print the spiral and don't have to worry about breaking out 
+// of the while loop
+// if I have to break out of the while loop and return the output?
+// easiest way was to introdue counter 
+// whenever the loop went through the whole matrix, return 
+
+spiral = (matrix) => {
+  // edge case
+  if(matrix.length === 0) return [];
+  let startRow = 0;
+  let endRow = matrix.length-1;
+  let startCol = 0;
+  let endCol = matrix[0].length-1;
+  let output = [];
+  let counter = matrix.length*matrix[0].length;
+
+  while(true) {
+    // travel right 
+    for ( let c = startCol; c <= endCol; c ++ ) {
+      counter--;
+      r = startRow;
+      // console.log("right", startCol, endCol, startRow, endRow, matrix[r][c])
+      output.push(matrix[r][c]);      
+      if(counter <= 0) return output;
+    }
+    // no need to travel that row any more so take that one out  
+    startRow++;
+    // travel down 
+    for (let r = startRow; r <= endRow; r++ ) {
+      c = endCol;
+      counter--;
+      // console.log("down", startCol, endCol, startRow, endRow, matrix[r][c])
+      output.push(matrix[r][c]);
+      if(counter <= 0) return output;
+    }
+    // remove that far right col
+    if( startCol < endCol){
+      endCol--;
+    }
+        //travel left
+    for ( let c = endCol; c >= startCol; c-- ) {
+      counter--;
+      console.log(counter)
+      r = endRow;
+      // console.log("left", startCol, endCol, startRow, endRow, matrix[r][c])
+      output.push(matrix[r][c]);
+      if(counter <= 0) return output;
+    }
+    // remove that bottom row
+    if( startRow < endRow) {
+      endRow--;
+    }
+    // travel up 
+    for (let r = endRow; r >= startRow; r-- ) {
+      counter--;
+      c = startCol;
+      // console.log("up", startCol, endCol, startRow, endRow, matrix[r][c])
+      output.push(matrix[r][c]);
+      if(counter <= 0) return output;
+    }
+    // remove the far left col  
+    startCol++;
+  }
+};
 console.log(spiral(data));
