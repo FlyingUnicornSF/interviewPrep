@@ -8,7 +8,7 @@
  * 4) Jump to line 94 to see an example for how the     *
  *    helper code is used to test findInOrderSuccessor. *
  ********************************************************/
-http://www.github.com/bilalba
+//http://www.github.com/bilalba
 
 // Constructor to create a new Node
 function Node(key) {
