@@ -34,7 +34,7 @@ class TreeNode{
 
 
 constructMaximumBinaryTree = (nums)=> {
-  // edge case:
+  // edge & base case:
   if( nums.length === 0) return null;
   
   let maxIndex = nums.indexOf(Math.max(...nums))
