@@ -24,7 +24,12 @@
  * 
  * You may return the answer in any order.
  * 
+ * 
+ * 
+ * 
  * Example 1:
+ * 
+ * 
  * Input: words = ["abc","deq","mee","aqq","dkd","ccc"], pattern = "abb"
  * Output: ["mee","aqq"]
  * Explanation: "mee" matches the pattern because there is a permutation {a ->
@@ -33,7 +38,19 @@
  * permutation,
  * since a and b map to the same letter.
  * 
+ * { a: '0',
+ *   b: "1,2,"}
+ * 
+ * { a: '0',
+ *  b: 1
+ *  c: 2}
+ * 
+ * { e: "1,2,",
+ *   m: '0'}
+ * 
  * Note:
+ * 
+ * 
  * 1 <= words.length <= 50
  * 1 <= pattern.length = words[i].length <= 20
  * 
@@ -45,37 +62,35 @@
  * @return {string[]}
  */
 var findAndReplacePattern = function(words, pattern) {
-  if (words.length < 1 || pattern.length < 1) return [];
-  let matches = [];
-  for (let index = 0; index < words.length; index++) {
-    const word = words[index];
-    if (doesWordMatchPattern(word, pattern)) {
-      matches.push(word);
+  let patternMap = new Map();
+  for( let i = 0; i < pattern.length; i++ ) {
+    let currentChar = pattern[i];
+    if(patternMap.has(currentChar)) {
+      let val = patternMap.get(currentChar);
+      patternMap.set(currentChar, val+toString(i)+",");
+    } else {
+      patternMap.set(currentChar, toString(i)+",");
     }
   }
-  return matches;
-};
 
-var doesWordMatchPattern = function(word, pattern) {
-  if (word.length !== pattern.length) return false;
-  let charMap = new Map();
-  let reverseMap = new Map();
-  for (let index = 0; index < pattern.length; index++) {
-    const currentChar = pattern[index];
-    const mappedChar = word[index];
-    if (!charMap.has(currentChar) &&
-        !reverseMap.has(mappedChar)) {
-      charMap.set(currentChar, mappedChar);
-      reverseMap.set(mappedChar, currentChar)
+  for( let j = 0; j < words.length; j++ ) {
+    let currentWord = words[j];
+    let wordMap = new Map();
+    for( let k = 0; k < currentWord.length; k++ ) {
+      let currentChar = currentWord[k];
+      if(wordMap.has(currentChar)) {
+        let val = wordMap.get(currentChar);
+        wordMap.set(currentChar, val+toString(i)+",");
+      } else {
+        wordMap.set(currentChar, toString(i)+",");
+      }
     }
-    else if (charMap.has(currentChar) &&
-             charMap.get(currentChar) !== mappedChar) {
-      return false;
-    }
-    else if (reverseMap.has(mappedChar) && 
-             reverseMap.get(mappedChar) !== currentChar) {
-      return false;
-    }
+    let conunter = 0;
+    wordMap.forEach((value, key)=>{
+      
+      
+    })
+
   }
-  return true;
+
 };
