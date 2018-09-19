@@ -58,5 +58,6 @@ var isValidBST = function(root) {
  return output;  
 };
 
-//console.log(isValidBST([5,1,4,null,null,3,6]))
-console.log(isValidBST([10, 5, 15, 3, 8, 14, 18, null, 4, 7, 9, null, null, 17]))
+console.log(isValidBST([5,1,4,null,null,3,6]))
+//console.log(isValidBST([10, 5, 15, 3, 8, 14, 18, null, 4, 7, 9, null, null, 17]))
+
